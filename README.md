@@ -8,10 +8,14 @@ https://github.com/iamcorey/analytics-script.git
 ## NPM Package
 https://www.npmjs.com/package/analytics-script
 
+## License
+
+MIT
+
 ## Supported Analytics
 
 - ✅ Plausible Analytics
-- 🚧 Umami (Coming soon)
+- ✅ Umami
 - 🚧 Google Analytics (Coming soon)
 - 🚧 DataFast (Coming soon)
 - 🚧 OpenPanel (Coming soon)
@@ -94,6 +98,69 @@ To test analytics in your local development environment:
 - Set `allowLocalhost={true}` to enable analytics tracking in development/localhost
 - If required `domain` and `scriptUrl` are not provided, the component will not render anything
 
-## License
+---
 
-MIT
+### Umami
+
+Use in your Next.js application:
+
+```tsx
+import { Umami } from 'analytics-script';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <head>
+        <Umami 
+          websiteId="e491a219-c444-422a-b80f-e65e016fdb31" 
+          scriptUrl="https://cloud.umami.is/script.js"
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+#### Props
+
+- `websiteId` (optional): Your Umami website ID. If not provided, it will use the environment variable `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
+- `scriptUrl` (optional): The URL of the Umami script. If not provided, it will use the environment variable `NEXT_PUBLIC_UMAMI_SCRIPT_URL`
+- `defer` (optional): Whether to defer loading the script. Defaults to `true`
+- `allowLocalhost` (optional): If `true`, the script will load regardless of the environment (including localhost/development). Defaults to `false`
+
+#### Using Environment Variables
+
+Set in your `.env.local` file:
+
+```env
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=e491a219-c444-422a-b80f-e65e016fdb31
+NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
+```
+
+Then simply use the component:
+
+```tsx
+import { Umami } from 'analytics-script';
+
+<Umami />
+```
+
+#### Testing in Development
+
+To test analytics in your local development environment:
+
+```tsx
+<Umami 
+  websiteId="e491a219-c444-422a-b80f-e65e016fdb31" 
+  scriptUrl="https://cloud.umami.is/script.js"
+  allowLocalhost={true}
+/>
+```
+
+#### Notes
+
+- By default, the component only renders in production environment (`NODE_ENV === "production"`)
+- Set `allowLocalhost={true}` to enable analytics tracking in development/localhost
+- If required `websiteId` and `scriptUrl` are not provided, the component will not render anything
+
