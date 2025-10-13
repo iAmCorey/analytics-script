@@ -99,7 +99,7 @@ import { GoogleAnalytics } from 'analytics-script';
 ```
 
 **Props:**
-- `gtagId` - Your Google Analytics measurement ID (or use env: `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`)
+- `gtagId` - Your Google Analytics measurement ID (or use env: `NEXT_PUBLIC_GOOGLE_TAG_ID`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
 ---
@@ -113,6 +113,9 @@ import { GoogleAnalytics } from 'analytics-script';
 
 
 ## Changelog
+
+### v0.3.1
+- ✅ Updated GoogleAnalytics props
 
 ### v0.3.0
 - ✅ Added GoogleAnalytics support

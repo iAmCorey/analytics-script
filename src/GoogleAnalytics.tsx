@@ -12,7 +12,7 @@ export function GoogleAnalytics({ gtagId, allowLocalhost = false }: Props): Reac
 
   const id =
     gtagId ??
-    (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID : undefined);
+    (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLE_TAG_ID : undefined);
 
   if (!isProd || !id) return null;
 
