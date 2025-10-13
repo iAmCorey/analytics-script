@@ -1,6 +1,6 @@
 # analytics-script
 
-Lightweight analytics script tags for React/Next.js applications (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)
+Lightweight analytics script tags for React/Next.js applications (Plausible, Umami, Google Analytics, DataFast, etc.)
 
 
 ## Github Repo
@@ -13,11 +13,10 @@ https://www.npmjs.com/package/analytics-script
 
 ## Supported Providers
 
-- ✅ Plausible Analytics
-- ✅ Umami
-- ✅ DataFast
-- ✅ Google Analytics
-- 🚧 OpenPanel (Coming soon)
+- Plausible Analytics
+- Umami
+- DataFast
+- Google Analytics
 
 
 ## Installation
@@ -101,6 +100,27 @@ import { GoogleAnalytics } from 'analytics-script';
 **Props:**
 - `gtagId` - Your Google Analytics measurement ID (or use env: `NEXT_PUBLIC_GOOGLE_TAG_ID`)
 - `allowLocalhost` - Enable in development (default: `false`)
+- `defaultConsent` - Default consent settings for GDPR compliance (optional). **Note**: This only sets the default consent state, you need to implement your own cookie banner UI and update consent when users accept.
+
+**With Consent Mode (GDPR Compliance):**
+
+Complete example with cookie banner:
+
+```tsx
+<GoogleAnalytics 
+  gtagId="G-XXXXXXXXXX"
+  defaultConsent={{
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied'
+  }}
+/>
+```
+
+> **Note**: For GDPR compliance, consider using a cookie consent library like:
+> - [react-cookie-consent](https://www.npmjs.com/package/react-cookie-consent)
+> - [vanilla-cookieconsent](https://www.npmjs.com/package/vanilla-cookieconsent)
 
 ---
 
@@ -114,26 +134,32 @@ import { GoogleAnalytics } from 'analytics-script';
 
 ## Changelog
 
+### v0.3.3
+- Added Google Analytics Consent Mode support (GDPR compliance)
+
+### v0.3.2
+- Changed React from dependencies to peerDependencies
+
 ### v0.3.1
-- ✅ Updated GoogleAnalytics props
+- Updated GoogleAnalytics props
 
 ### v0.3.0
-- ✅ Added GoogleAnalytics support
+- Added GoogleAnalytics support
 
 ### v0.2.0
-- ✅ Added DataFast support
+- Added DataFast support
 
 ### v0.1.0
-- ✅ Added Umami support
-- ✅ Added `allowLocalhost` prop for development testing
-- 🐛 Fixed TypeScript JSX type errors
+- Added Umami support
+- Added `allowLocalhost` prop for development testing
+- Fixed TypeScript JSX type errors
 
 ### v0.0.2
-- 🐛 Fixed TypeScript type definitions
+- Fixed TypeScript type definitions
 
 ### v0.0.1
-- 🎉 Initial release
-- ✅ Plausible support
+- Initial release
+- Plausible support
 
 
 ## License
