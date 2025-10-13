@@ -45,11 +45,11 @@ import { Plausible } from 'analytics-script';
 />
 ```
 
-**New format (with initialization):**
+**With initialization (newer format):**
 ```tsx
-import { PlausibleNew } from 'analytics-script';
+import { PlausibleInit } from 'analytics-script';
 
-<PlausibleNew 
+<PlausibleInit 
   scriptUrl="https://plausible.io/js/pa-XXXXX.js"
 />
 ```
@@ -60,7 +60,7 @@ import { PlausibleNew } from 'analytics-script';
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
-**Props for `PlausibleNew`:**
+**Props for `PlausibleInit`:**
 - `scriptUrl` - Plausible script URL (domain is encoded in the URL) (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
 - `defer` - Use async loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
@@ -303,6 +303,9 @@ export default function App() {
 
 
 ## Changelog
+
+### v0.4.1
+- Updated new Plausible script
 
 ### v0.4.0
 - Added new Plausible script support

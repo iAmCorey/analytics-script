@@ -33,9 +33,9 @@ export function Plausible({ domain, scriptUrl, defer = true, allowLocalhost = fa
 }
 
 /**
- * Plausible Analytics component (modern format with initialization)
+ * Plausible Analytics component (with initialization script)
  */
-export function PlausibleNew({ scriptUrl, defer = true, allowLocalhost = false }: Omit<Props, 'domain'>): React.ReactElement | null {
+export function PlausibleInit({ scriptUrl, defer = true, allowLocalhost = false }: Omit<Props, 'domain'>): React.ReactElement | null {
   const isProd =
     allowLocalhost || (typeof process !== "undefined" ? process.env.NODE_ENV === "production" : true);
 
