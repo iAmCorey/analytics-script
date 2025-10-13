@@ -10,6 +10,9 @@ https://www.npmjs.com/package/analytics-script
 
 ## Changelog
 
+### v0.2.0
+- ✅ Added DataFast Analytics support
+
 ### v0.1.0
 - ✅ Added Umami Analytics support
 - ✅ Added `allowLocalhost` prop for development testing
@@ -30,8 +33,8 @@ MIT
 
 - ✅ Plausible Analytics
 - ✅ Umami
+- ✅ DataFast
 - 🚧 Google Analytics (Coming soon)
-- 🚧 DataFast (Coming soon)
 - 🚧 OpenPanel (Coming soon)
 
 ## Installation
@@ -79,6 +82,25 @@ import { Umami } from 'analytics-script';
 **Props:**
 - `websiteId` - Your Umami website ID (or use env: `NEXT_PUBLIC_UMAMI_WEBSITE_ID`)
 - `scriptUrl` - Umami script URL (or use env: `NEXT_PUBLIC_UMAMI_SCRIPT_URL`)
+- `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+### DataFast
+
+```tsx
+import { DataFast } from 'analytics-script';
+
+<DataFast 
+  websiteId="dfid_XFdSyxWFOIZjQMDIE57qI" 
+  domain="yourdomain.com"
+  scriptUrl="https://datafa.st/js/script.js"
+/>
+```
+
+**Props:**
+- `websiteId` - Your DataFast website ID (or use env: `NEXT_PUBLIC_DATAFAST_WEBSITE_ID`)
+- `domain` - Your website domain (or use env: `NEXT_PUBLIC_DATAFAST_DOMAIN`)
+- `scriptUrl` - DataFast script URL (or use env: `NEXT_PUBLIC_DATAFAST_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
