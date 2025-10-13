@@ -104,8 +104,6 @@ import { GoogleAnalytics } from 'analytics-script';
 
 **With Consent Mode (GDPR Compliance):**
 
-Complete example with cookie banner:
-
 ```tsx
 <GoogleAnalytics 
   gtagId="G-XXXXXXXXXX"
@@ -116,6 +114,54 @@ Complete example with cookie banner:
     analytics_storage: 'denied'
   }}
 />
+```
+
+Example Code
+
+1. Install a cookie consent library:
+```bash
+npm install react-cookie-consent
+```
+
+2. Complete Code
+```tsx
+import { GoogleAnalytics } from 'analytics-script';
+import CookieConsent from 'react-cookie-consent';
+
+export default function App() {
+  return (
+    <>
+      {/* Set default consent to denied */}
+      <GoogleAnalytics 
+        gtagId="G-XXXXXXXXXX"
+        defaultConsent={{
+          analytics_storage: 'denied'
+        }}
+      />
+
+      {/* Cookie consent banner */}
+      <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        declineButtonText="Decline"
+        enableDeclineButton
+        onAccept={() => {
+          // Update consent when user accepts
+          window.gtag?.('consent', 'update', {
+            analytics_storage: 'granted'
+          });
+        }}
+        style={{ background: '#2B373B' }}
+        buttonStyle={{ background: '#4CAF50', color: '#fff', fontSize: '14px' }}
+        declineButtonStyle={{ background: '#f44336', color: '#fff', fontSize: '14px' }}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
+
+      {/* Your app content */}
+    </>
+  );
+}
 ```
 
 > **Note**: For GDPR compliance, consider using a cookie consent library like:
@@ -133,6 +179,9 @@ Complete example with cookie banner:
 
 
 ## Changelog
+
+### v0.3.4
+- Added Google Analytics Consent Mode Example Code
 
 ### v0.3.3
 - Added Google Analytics Consent Mode support (GDPR compliance)
