@@ -1,6 +1,6 @@
 # analytics-script
 
-Lightweight analytics script tags for web/Next.js (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)
+Lightweight analytics script tags for React/Next.js applications (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)
 
 ## Github Repo
 https://github.com/iamcorey/analytics-script.git
@@ -8,11 +8,25 @@ https://github.com/iamcorey/analytics-script.git
 ## NPM Package
 https://www.npmjs.com/package/analytics-script
 
+## Changelog
+
+### v0.1.0
+- ✅ Added Umami Analytics support
+- ✅ Added `allowLocalhost` prop for development testing
+- 🐛 Fixed TypeScript JSX type errors
+
+### v0.0.2
+- 🐛 Fixed TypeScript type definitions
+
+### v0.0.1
+- 🎉 Initial release
+- ✅ Plausible Analytics support
+
 ## License
 
 MIT
 
-## Supported Analytics
+## Supported Providers
 
 - ✅ Plausible Analytics
 - ✅ Umami
@@ -34,133 +48,45 @@ pnpm add analytics-script
 
 ## Usage
 
-### Plausible Analytics
-
-Use in your Next.js application:
+### Plausible
 
 ```tsx
 import { Plausible } from 'analytics-script';
 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <head>
-        <Plausible 
-          domain="yourdomain.com" 
-          scriptUrl="https://plausible.io/js/script.js"
-        />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-#### Props
-
-- `domain` (optional): Your website domain. If not provided, it will use the environment variable `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`
-- `scriptUrl` (optional): The URL of the Plausible script. If not provided, it will use the environment variable `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`
-- `defer` (optional): Whether to defer loading the script. Defaults to `true`
-- `allowLocalhost` (optional): If `true`, the script will load regardless of the environment (including localhost/development). Defaults to `false`
-
-#### Using Environment Variables
-
-Set in your `.env.local` file:
-
-```env
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
-NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL=https://plausible.io/js/script.js
-```
-
-Then simply use the component:
-
-```tsx
-import { Plausible } from 'analytics-script';
-
-<Plausible />
-```
-
-#### Testing in Development
-
-To test analytics in your local development environment:
-
-```tsx
 <Plausible 
   domain="yourdomain.com" 
   scriptUrl="https://plausible.io/js/script.js"
-  allowLocalhost={true}
 />
 ```
 
-#### Notes
-
-- By default, the component only renders in production environment (`NODE_ENV === "production"`)
-- Set `allowLocalhost={true}` to enable analytics tracking in development/localhost
-- If required `domain` and `scriptUrl` are not provided, the component will not render anything
-
----
+**Props:**
+- `domain` - Your website domain (or use env: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
+- `scriptUrl` - Plausible script URL (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
+- `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
 
 ### Umami
 
-Use in your Next.js application:
-
 ```tsx
 import { Umami } from 'analytics-script';
 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <head>
-        <Umami 
-          websiteId="e491a219-c444-422a-b80f-e65e016fdb31" 
-          scriptUrl="https://cloud.umami.is/script.js"
-        />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-#### Props
-
-- `websiteId` (optional): Your Umami website ID. If not provided, it will use the environment variable `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
-- `scriptUrl` (optional): The URL of the Umami script. If not provided, it will use the environment variable `NEXT_PUBLIC_UMAMI_SCRIPT_URL`
-- `defer` (optional): Whether to defer loading the script. Defaults to `true`
-- `allowLocalhost` (optional): If `true`, the script will load regardless of the environment (including localhost/development). Defaults to `false`
-
-#### Using Environment Variables
-
-Set in your `.env.local` file:
-
-```env
-NEXT_PUBLIC_UMAMI_WEBSITE_ID=e491a219-c444-422a-b80f-e65e016fdb31
-NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
-```
-
-Then simply use the component:
-
-```tsx
-import { Umami } from 'analytics-script';
-
-<Umami />
-```
-
-#### Testing in Development
-
-To test analytics in your local development environment:
-
-```tsx
 <Umami 
-  websiteId="e491a219-c444-422a-b80f-e65e016fdb31" 
+  websiteId="your-website-id" 
   scriptUrl="https://cloud.umami.is/script.js"
-  allowLocalhost={true}
 />
 ```
 
-#### Notes
+**Props:**
+- `websiteId` - Your Umami website ID (or use env: `NEXT_PUBLIC_UMAMI_WEBSITE_ID`)
+- `scriptUrl` - Umami script URL (or use env: `NEXT_PUBLIC_UMAMI_SCRIPT_URL`)
+- `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
 
-- By default, the component only renders in production environment (`NODE_ENV === "production"`)
-- Set `allowLocalhost={true}` to enable analytics tracking in development/localhost
-- If required `websiteId` and `scriptUrl` are not provided, the component will not render anything
+---
+
+### Notes
+
+- **Production Only**: By default, all components only render in production (`NODE_ENV === "production"`)
+- **Environment Variables**: Set props via environment variables (e.g., in `.env.local`)
+- **Development Testing**: Use `allowLocalhost={true}` to test in development
 
