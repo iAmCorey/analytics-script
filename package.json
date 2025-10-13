@@ -4,12 +4,41 @@
     "description": "Lightweight analytics script tags for web/Next.js (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "files": ["dist", "README.md", "LICENSE"],
-    "scripts": { "build": "tsc" },
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
+    },
     "license": "MIT",
-    "keywords": ["analytics","script","plausible","umami","google analytics","datafast","openpanel","nextjs","tag"],
-    "repository": { "type": "git", "url": "git+https://github.com/iamcorey/analytics-script.git" },
-    "bugs": { "url": "https://github.com/iamcorey/analytics-script/issues" },
+    "keywords": [
+        "analytics",
+        "script",
+        "plausible",
+        "umami",
+        "google analytics",
+        "datafast",
+        "openpanel",
+        "nextjs",
+        "tag"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamcorey/analytics-script.git"
+    },
+    "bugs": {
+        "url": "https://github.com/iamcorey/analytics-script/issues"
+    },
     "homepage": "https://github.com/iamcorey/analytics-script#readme",
-    "devDependencies": { "typescript": "^5.6.0" }
-  }
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/react": "^18.3.0",
+        "typescript": "^5.6.0"
+    },
+    "dependencies": {
+        "react": "^19.2.0"
+    }
+}

@@ -1,3 +1,11 @@
+dist/
+*.tsbuildinfo
+.env*
+.DS_Store
+.idea/
+.vscode/
+
+
 # Logs
 logs
 *.log
