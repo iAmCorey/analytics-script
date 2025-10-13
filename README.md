@@ -10,11 +10,14 @@ https://www.npmjs.com/package/analytics-script
 
 ## Changelog
 
+### v0.3.0
+- ✅ Added GoogleAnalytics support
+
 ### v0.2.0
-- ✅ Added DataFast Analytics support
+- ✅ Added DataFast support
 
 ### v0.1.0
-- ✅ Added Umami Analytics support
+- ✅ Added Umami support
 - ✅ Added `allowLocalhost` prop for development testing
 - 🐛 Fixed TypeScript JSX type errors
 
@@ -23,7 +26,7 @@ https://www.npmjs.com/package/analytics-script
 
 ### v0.0.1
 - 🎉 Initial release
-- ✅ Plausible Analytics support
+- ✅ Plausible support
 
 ## License
 
@@ -34,7 +37,7 @@ MIT
 - ✅ Plausible Analytics
 - ✅ Umami
 - ✅ DataFast
-- 🚧 Google Analytics (Coming soon)
+- ✅ Google Analytics
 - 🚧 OpenPanel (Coming soon)
 
 ## Installation
@@ -102,6 +105,18 @@ import { DataFast } from 'analytics-script';
 - `domain` - Your website domain (or use env: `NEXT_PUBLIC_DATAFAST_DOMAIN`)
 - `scriptUrl` - DataFast script URL (or use env: `NEXT_PUBLIC_DATAFAST_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+### Google Analytics
+
+```tsx
+import { GoogleAnalytics } from 'analytics-script';
+
+<GoogleAnalytics gtagId="G-XXXXXXXXXX" />
+```
+
+**Props:**
+- `gtagId` - Your Google Analytics measurement ID (or use env: `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
 ---
