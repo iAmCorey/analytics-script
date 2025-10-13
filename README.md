@@ -35,6 +35,7 @@ pnpm add analytics-script
 
 ### Plausible
 
+**Standard (legacy format):**
 ```tsx
 import { Plausible } from 'analytics-script';
 
@@ -44,10 +45,24 @@ import { Plausible } from 'analytics-script';
 />
 ```
 
-**Props:**
+**New format (with initialization):**
+```tsx
+import { PlausibleNew } from 'analytics-script';
+
+<PlausibleNew 
+  scriptUrl="https://plausible.io/js/pa-XXXXX.js"
+/>
+```
+
+**Props for `Plausible`:**
 - `domain` - Your website domain (or use env: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
 - `scriptUrl` - Plausible script URL (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+**Props for `PlausibleNew`:**
+- `scriptUrl` - Plausible script URL (domain is encoded in the URL) (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
+- `defer` - Use async loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
 
@@ -102,6 +117,17 @@ import { GoogleAnalytics } from 'analytics-script';
 - `allowLocalhost` - Enable in development (default: `false`)
 - `defaultConsent` - Default consent settings for GDPR compliance (optional). **Note**: This only sets the default consent state, you need to implement your own cookie banner UI and update consent when users accept.
 
+**Sending Custom Events:**
+
+```tsx
+import { sendGAEvent } from 'analytics-script';
+
+// Send a custom event
+<button onClick={() => sendGAEvent('button_click', { category: 'engagement' })}>
+  Click me
+</button>
+```
+
 **With Consent Mode (GDPR Compliance):**
 
 ```tsx
@@ -132,7 +158,7 @@ npm install react-cookie-consent
 
 2. Complete Code
 ```tsx
-import { GoogleAnalytics } from 'analytics-script';
+import { GoogleAnalytics, updateGoogleConsent } from 'analytics-script';
 import CookieConsent from 'react-cookie-consent';
 
 export default function App() {
@@ -154,7 +180,7 @@ export default function App() {
         enableDeclineButton
         onAccept={() => {
           // Update consent when user accepts
-          window.gtag?.('consent', 'update', {
+          updateGoogleConsent({
             analytics_storage: 'granted'
           });
         }}
@@ -277,6 +303,11 @@ export default function App() {
 
 
 ## Changelog
+
+### v0.4.0
+- Added new Plausible script support
+- Added Google Analytics Events support
+- Added Google Analytics Consent Mode update function
 
 ### v0.3.5
 - Added Google Analytics Consent Mode Example Code

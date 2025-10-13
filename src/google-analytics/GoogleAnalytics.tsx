@@ -1,4 +1,4 @@
-// src/GoogleAnalytics.tsx
+// src/google-analytics/GoogleAnalytics.tsx
 import * as React from 'react';
 
 type ConsentMode = {

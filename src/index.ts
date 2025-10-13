@@ -1,4 +1,4 @@
-export { Plausible } from "./Plausible";
-export { Umami } from "./Umami";
-export { DataFast } from "./DataFast";
-export { GoogleAnalytics } from "./GoogleAnalytics";
+export { Plausible, PlausibleNew } from "./plausible/Plausible";
+export { Umami } from "./umami/Umami";
+export { DataFast } from "./datafast/DataFast";
+export { GoogleAnalytics, updateGoogleConsent, sendGAEvent } from "./google-analytics/index";

@@ -1,4 +1,4 @@
-// src/Umami.tsx
+// src/umami/Umami.tsx
 import * as React from 'react';
 
 type Props = {
