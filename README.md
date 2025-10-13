@@ -91,7 +91,7 @@ import { Umami } from 'analytics-script';
 import { DataFast } from 'analytics-script';
 
 <DataFast 
-  websiteId="dfid_XFdSyxWFOIZjQMDIE57qI" 
+  websiteId="your-website-id" 
   domain="yourdomain.com"
   scriptUrl="https://datafa.st/js/script.js"
 />
