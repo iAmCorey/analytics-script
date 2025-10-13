@@ -116,7 +116,14 @@ import { GoogleAnalytics } from 'analytics-script';
 />
 ```
 
-Example Code
+> **Note**: For GDPR compliance, consider using a cookie consent library like:
+> - [react-cookie-consent](https://www.npmjs.com/package/react-cookie-consent)
+> - [vanilla-cookieconsent](https://www.npmjs.com/package/vanilla-cookieconsent)
+
+
+#### Example Code
+using `react-cookie-consent`
+
 
 1. Install a cookie consent library:
 ```bash
@@ -164,9 +171,100 @@ export default function App() {
 }
 ```
 
-> **Note**: For GDPR compliance, consider using a cookie consent library like:
-> - [react-cookie-consent](https://www.npmjs.com/package/react-cookie-consent)
-> - [vanilla-cookieconsent](https://www.npmjs.com/package/vanilla-cookieconsent)
+
+using `vanilla-cookieconsent`
+
+
+1. Install a cookie consent library:
+```bash
+npm install vanilla-cookieconsent
+```
+
+2. Complete Code
+```tsx
+'use client';
+import { GoogleAnalytics } from 'analytics-script';
+import { useEffect } from 'react';
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+import * as CookieConsent from 'vanilla-cookieconsent';
+
+export default function App() {
+  useEffect(() => {
+    CookieConsent.run({
+      categories: {
+        necessary: {
+          enabled: true,
+          readOnly: true
+        },
+        analytics: {
+          enabled: false
+        }
+      },
+
+      language: {
+        default: 'en',
+        translations: {
+          en: {
+            consentModal: {
+              title: 'We use cookies',
+              description: 'Cookie modal description',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Reject all',
+              showPreferencesBtn: 'Manage preferences'
+            },
+            preferencesModal: {
+              title: 'Cookie preferences',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Reject all',
+              savePreferencesBtn: 'Save preferences',
+              sections: [
+                {
+                  title: 'Analytics cookies',
+                  description: 'These cookies help us improve our website.',
+                  linkedCategory: 'analytics'
+                }
+              ]
+            }
+          }
+        }
+      },
+
+      onConsent: () => {
+        if (CookieConsent.acceptedCategory('analytics')) {
+          window.gtag?.('consent', 'update', {
+            analytics_storage: 'granted'
+          });
+        }
+      },
+
+      onChange: () => {
+        if (CookieConsent.acceptedCategory('analytics')) {
+          window.gtag?.('consent', 'update', {
+            analytics_storage: 'granted'
+          });
+        } else {
+          window.gtag?.('consent', 'update', {
+            analytics_storage: 'denied'
+          });
+        }
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <GoogleAnalytics 
+        gtagId="G-XXXXXXXXXX"
+        defaultConsent={{
+          analytics_storage: 'denied'
+        }}
+      />
+      {/* Your app content */}
+    </>
+  );
+}
+```
+
 
 ---
 
@@ -180,7 +278,7 @@ export default function App() {
 
 ## Changelog
 
-### v0.3.4
+### v0.3.5
 - Added Google Analytics Consent Mode Example Code
 
 ### v0.3.3
