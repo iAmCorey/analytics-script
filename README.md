@@ -2,35 +2,14 @@
 
 Lightweight analytics script tags for React/Next.js applications (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)
 
+
 ## Github Repo
 https://github.com/iamcorey/analytics-script.git
+
 
 ## NPM Package
 https://www.npmjs.com/package/analytics-script
 
-## Changelog
-
-### v0.3.0
-- ✅ Added GoogleAnalytics support
-
-### v0.2.0
-- ✅ Added DataFast support
-
-### v0.1.0
-- ✅ Added Umami support
-- ✅ Added `allowLocalhost` prop for development testing
-- 🐛 Fixed TypeScript JSX type errors
-
-### v0.0.2
-- 🐛 Fixed TypeScript type definitions
-
-### v0.0.1
-- 🎉 Initial release
-- ✅ Plausible support
-
-## License
-
-MIT
 
 ## Supported Providers
 
@@ -39,6 +18,7 @@ MIT
 - ✅ DataFast
 - ✅ Google Analytics
 - 🚧 OpenPanel (Coming soon)
+
 
 ## Installation
 
@@ -71,6 +51,7 @@ import { Plausible } from 'analytics-script';
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
+
 ### Umami
 
 ```tsx
@@ -87,6 +68,7 @@ import { Umami } from 'analytics-script';
 - `scriptUrl` - Umami script URL (or use env: `NEXT_PUBLIC_UMAMI_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
+
 
 ### DataFast
 
@@ -107,6 +89,7 @@ import { DataFast } from 'analytics-script';
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
 
+
 ### Google Analytics
 
 ```tsx
@@ -121,9 +104,35 @@ import { GoogleAnalytics } from 'analytics-script';
 
 ---
 
+
 ### Notes
 
 - **Production Only**: By default, all components only render in production (`NODE_ENV === "production"`)
 - **Environment Variables**: Set props via environment variables (e.g., in `.env.local`)
 - **Development Testing**: Use `allowLocalhost={true}` to test in development
 
+
+## Changelog
+
+### v0.3.0
+- ✅ Added GoogleAnalytics support
+
+### v0.2.0
+- ✅ Added DataFast support
+
+### v0.1.0
+- ✅ Added Umami support
+- ✅ Added `allowLocalhost` prop for development testing
+- 🐛 Fixed TypeScript JSX type errors
+
+### v0.0.2
+- 🐛 Fixed TypeScript type definitions
+
+### v0.0.1
+- 🎉 Initial release
+- ✅ Plausible support
+
+
+## License
+
+MIT
