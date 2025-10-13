@@ -57,6 +57,7 @@ export default function RootLayout({ children }) {
 - `domain` (optional): Your website domain. If not provided, it will use the environment variable `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`
 - `scriptUrl` (optional): The URL of the Plausible script. If not provided, it will use the environment variable `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`
 - `defer` (optional): Whether to defer loading the script. Defaults to `true`
+- `allowLocalhost` (optional): If `true`, the script will load regardless of the environment (including localhost/development). Defaults to `false`
 
 #### Using Environment Variables
 
@@ -75,9 +76,22 @@ import { Plausible } from 'analytics-script';
 <Plausible />
 ```
 
+#### Testing in Development
+
+To test analytics in your local development environment:
+
+```tsx
+<Plausible 
+  domain="yourdomain.com" 
+  scriptUrl="https://plausible.io/js/script.js"
+  allowLocalhost={true}
+/>
+```
+
 #### Notes
 
-- The component only renders in production environment (`NODE_ENV === "production"`)
+- By default, the component only renders in production environment (`NODE_ENV === "production"`)
+- Set `allowLocalhost={true}` to enable analytics tracking in development/localhost
 - If required `domain` and `scriptUrl` are not provided, the component will not render anything
 
 ## License

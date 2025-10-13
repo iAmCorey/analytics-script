@@ -5,11 +5,12 @@ type Props = {
   domain?: string;
   scriptUrl?: string;
   defer?: boolean;
+  allowLocalhost?: boolean;
 };
 
-export function Plausible({ domain, scriptUrl, defer = true }: Props): React.ReactElement | null {
+export function Plausible({ domain, scriptUrl, defer = true, allowLocalhost = false }: Props): React.ReactElement | null {
   const isProd =
-    typeof process !== "undefined" ? process.env.NODE_ENV === "production" : true;
+    allowLocalhost || (typeof process !== "undefined" ? process.env.NODE_ENV === "production" : true);
 
   const d =
     domain ??
