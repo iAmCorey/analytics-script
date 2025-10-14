@@ -96,12 +96,143 @@ import { DataFast } from 'analytics-script';
 />
 ```
 
-**Props:**
+**Props**
 - `websiteId` - Your DataFast website ID (or use env: `NEXT_PUBLIC_DATAFAST_WEBSITE_ID`)
 - `domain` - Your website domain (or use env: `NEXT_PUBLIC_DATAFAST_DOMAIN`)
 - `scriptUrl` - DataFast script URL (or use env: `NEXT_PUBLIC_DATAFAST_SCRIPT_URL`)
+- `apiUrl` - Custom API endpoint for sending events. Provide a full URL or a relative path (optional, or use env: `NEXT_PUBLIC_DATAFAST_API_URL`)
+  - Example: `https://api.example.com/events` or `/custom-events`
+  - Use case: Custom API endpoints, third-party analytics proxies, or advanced proxy configurations
+- `allowedHostnames` - Comma-separated list of additional domains for cross-domain tracking (optional, or use env: `NEXT_PUBLIC_DATAFAST_ALLOWED_HOSTNAMES`)
+  - Example: `app.io,shop.example.com`
+  - Use case: Track users across different root domains
 - `defer` - Defer script loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
+- `allowFileProtocol` - Enable tracking when opening HTML files directly in browser (file:// protocol) (default: `false`)
+  - Use case: Testing with local HTML files
+- `debug` - Enable debug mode to allow tracking inside iframes (default: `false`)
+  - Use case: Testing tracking in embedded contexts
+- `disableConsole` - Disable all console logging from DataFast tracker (default: `false`)
+  - Use case: Clean console logs in production
+
+
+#### Tracking Custom Goals/Events 
+
+**Client-side Tracking:**
+
+```tsx
+import { trackDataFastGoal } from 'analytics-script';
+
+// Simple goal tracking
+<button onClick={() => trackDataFastGoal('signup')}>
+  Sign Up
+</button>
+
+<button onClick={() => trackDataFastGoal('purchase')}>
+  Buy Now
+</button>
+
+// Advanced usage with custom parameters
+<button onClick={() => trackDataFastGoal('checkout_initiated', {
+  name: 'Elon Musk',
+  email: 'elon@x.com',
+  product_id: 'prod_123',
+})}>
+  Checkout
+</button>
+```
+
+**Server-side Tracking:**
+
+Use server-side tracking in API routes, server actions, or backend code:
+
+```tsx
+import { trackDataFastGoalServer } from 'analytics-script';
+
+// Basic server-side tracking
+const result = await trackDataFastGoalServer({
+  apiKey: 'your_api_key',
+  visitorId: 'visitor_123',
+  goalName: 'newsletter_signup',
+});
+
+if (result.success) {
+  console.log('Goal tracked successfully');
+} else {
+  console.error('Error tracking goal:', result.error);
+}
+
+// With metadata
+const result = await trackDataFastGoalServer({
+  apiKey: 'your_api_key',
+  visitorId: 'visitor_123',
+  goalName: 'newsletter_signup',
+  metadata: {
+    name: 'Elon Musk',
+    email: 'musk@x.com',
+  },
+});
+
+// With custom API URL (for self-hosted or proxy)
+const result = await trackDataFastGoalServer({
+  apiKey: 'your_api_key',
+  visitorId: 'visitor_123',
+  goalName: 'purchase',
+  metadata: { amount: 99.99 },
+  apiUrl: 'https://custom.datafa.st/api/v1/goals',
+});
+```
+
+**Example in Next.js API Route:**
+
+```tsx
+// app/api/track/route.ts
+import { trackDataFastGoalServer } from 'analytics-script';
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  const { visitorId, goalName, metadata } = await request.json();
+
+  const result = await trackDataFastGoalServer({
+    apiKey: process.env.DATAFAST_API_KEY!,
+    visitorId,
+    goalName,
+    metadata,
+  });
+
+  if (result.success) {
+    return NextResponse.json({ success: true });
+  } else {
+    return NextResponse.json(
+      { success: false, error: result.error },
+      { status: 500 }
+    );
+  }
+}
+```
+
+
+**HTML data attributes - Reliable Tracking:**
+
+Add `DataFastQueue` before the main `DataFast` script to ensure events are captured even when triggered before the main script loads:
+
+```tsx
+import { DataFastQueue, DataFast } from 'analytics-script';
+
+// In your layout or _app.tsx
+<head>
+  <DataFastQueue />
+  <DataFast 
+    websiteId="your-website-id" 
+    domain="yourdomain.com"
+    scriptUrl="https://datafa.st/js/script.js"
+  />
+</head>
+```
+
+**Props**
+- `allowLocalhost` - Enable in development (default: `false`)
+
 
 
 ### Google Analytics
@@ -303,6 +434,10 @@ export default function App() {
 
 
 ## Changelog
+
+### v0.5.0
+- Updated DataFast script
+
 
 ### v0.4.1
 - Updated new Plausible script
