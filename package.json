@@ -1,6 +1,6 @@
 {
     "name": "analytics-script",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "description": "Lightweight analytics script tags for React/Next.js applications (Plausible, Umami, Google Analytics, DataFast, OpenPanel, etc.)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
