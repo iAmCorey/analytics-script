@@ -17,6 +17,7 @@ https://www.npmjs.com/package/analytics-script
 - Umami
 - DataFast
 - Google Analytics
+- Mixpanel
 
 
 ## Installation
@@ -35,7 +36,8 @@ pnpm add analytics-script
 
 ### Plausible
 
-**Standard (legacy format):**
+#### Standard (legacy format)
+
 ```tsx
 import { Plausible } from 'analytics-script';
 
@@ -45,7 +47,16 @@ import { Plausible } from 'analytics-script';
 />
 ```
 
-**With initialization (newer format):**
+
+**Props for `Plausible`:**
+- `domain` - Your website domain (or use env: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
+- `scriptUrl` - Plausible script URL (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
+- `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+
+#### With initialization (newer format)
+
 ```tsx
 import { PlausibleInit } from 'analytics-script';
 
@@ -54,11 +65,6 @@ import { PlausibleInit } from 'analytics-script';
 />
 ```
 
-**Props for `Plausible`:**
-- `domain` - Your website domain (or use env: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
-- `scriptUrl` - Plausible script URL (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
-- `defer` - Defer script loading (default: `true`)
-- `allowLocalhost` - Enable in development (default: `false`)
 
 **Props for `PlausibleInit`:**
 - `scriptUrl` - Plausible script URL (domain is encoded in the URL) (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
@@ -231,6 +237,26 @@ import { DataFastQueue, DataFast } from 'analytics-script';
 ```
 
 **Props**
+- `allowLocalhost` - Enable in development (default: `false`)
+
+
+
+### Mixpanel
+
+```tsx
+import { Mixpanel } from 'analytics-script';
+
+<Mixpanel 
+  token="your-mixpanel-token"
+  autocapture={true}
+  record_sessions_percent={true}
+/>
+```
+
+**Props:**
+- `token` - Your Mixpanel project token (or use env: `NEXT_PUBLIC_MIXPANEL_TOKEN`)
+- `autocapture` - Enable automatic event tracking (optional)
+- `record_sessions_percent` - Enable session recording (`true` = 100%, `false` = 0%) (optional)
 - `allowLocalhost` - Enable in development (default: `false`)
 
 
@@ -435,9 +461,11 @@ export default function App() {
 
 ## Changelog
 
+### v0.6.0
+- Added Mixpanel support
+
 ### v0.5.0
 - Updated DataFast script
-
 
 ### v0.4.1
 - Updated new Plausible script
