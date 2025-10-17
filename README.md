@@ -18,6 +18,7 @@ https://www.npmjs.com/package/analytics-script
 - DataFast
 - Google Analytics
 - Mixpanel
+- Crisp Chat
 
 
 ## Installation
@@ -48,7 +49,7 @@ import { Plausible } from 'analytics-script';
 ```
 
 
-**Props for `Plausible`:**
+**Props**
 - `domain` - Your website domain (or use env: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
 - `scriptUrl` - Plausible script URL (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
@@ -66,7 +67,7 @@ import { PlausibleInit } from 'analytics-script';
 ```
 
 
-**Props for `PlausibleInit`:**
+**Props**
 - `scriptUrl` - Plausible script URL (domain is encoded in the URL) (or use env: `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL`)
 - `defer` - Use async loading (default: `true`)
 - `allowLocalhost` - Enable in development (default: `false`)
@@ -83,7 +84,7 @@ import { Umami } from 'analytics-script';
 />
 ```
 
-**Props:**
+**Props**
 - `websiteId` - Your Umami website ID (or use env: `NEXT_PUBLIC_UMAMI_WEBSITE_ID`)
 - `scriptUrl` - Umami script URL (or use env: `NEXT_PUBLIC_UMAMI_SCRIPT_URL`)
 - `defer` - Defer script loading (default: `true`)
@@ -253,12 +254,25 @@ import { Mixpanel } from 'analytics-script';
 />
 ```
 
-**Props:**
+**Props**
 - `token` - Your Mixpanel project token (or use env: `NEXT_PUBLIC_MIXPANEL_TOKEN`)
 - `autocapture` - Enable automatic event tracking (optional)
 - `record_sessions_percent` - Enable session recording (`true` = 100%, `false` = 0%) (optional)
 - `allowLocalhost` - Enable in development (default: `false`)
 
+
+
+### Crisp Chat
+
+```tsx
+import { Crisp } from 'analytics-script';
+
+<Crisp websiteId="your-crisp-website-id" />
+```
+
+**Props**
+- `websiteId` - Your Crisp website ID (or use env: `NEXT_PUBLIC_CRISP_WEBSITE_ID`)
+- `allowLocalhost` - Enable in development (default: `false`)
 
 
 ### Google Analytics
@@ -269,7 +283,7 @@ import { GoogleAnalytics } from 'analytics-script';
 <GoogleAnalytics gtagId="G-XXXXXXXXXX" />
 ```
 
-**Props:**
+**Props**
 - `gtagId` - Your Google Analytics measurement ID (or use env: `NEXT_PUBLIC_GOOGLE_TAG_ID`)
 - `allowLocalhost` - Enable in development (default: `false`)
 - `defaultConsent` - Default consent settings for GDPR compliance (optional). **Note**: This only sets the default consent state, you need to implement your own cookie banner UI and update consent when users accept.
@@ -461,49 +475,52 @@ export default function App() {
 
 ## Changelog
 
+### v0.7.0
+- Add Crisp Chat support
+
 ### v0.6.0
-- Added Mixpanel support
+- Add Mixpanel support
 
 ### v0.5.0
-- Updated DataFast script
+- Update DataFast script
 
 ### v0.4.1
-- Updated new Plausible script
+- Update new Plausible script
 
 ### v0.4.0
-- Added new Plausible script support
-- Added Google Analytics Events support
-- Added Google Analytics Consent Mode update function
+- Add new Plausible script support
+- Add Google Analytics Events support
+- Add Google Analytics Consent Mode update function
 
 ### v0.3.5
-- Added Google Analytics Consent Mode Example Code
+- Add Google Analytics Consent Mode Example Code
 
 ### v0.3.3
-- Added Google Analytics Consent Mode support (GDPR compliance)
+- Add Google Analytics Consent Mode support (GDPR compliance)
 
 ### v0.3.2
-- Changed React from dependencies to peerDependencies
+- Change React from dependencies to peerDependencies
 
 ### v0.3.1
-- Updated GoogleAnalytics props
+- Update GoogleAnalytics props
 
 ### v0.3.0
-- Added GoogleAnalytics support
+- Add GoogleAnalytics support
 
 ### v0.2.0
-- Added DataFast support
+- Add DataFast support
 
 ### v0.1.0
-- Added Umami support
-- Added `allowLocalhost` prop for development testing
-- Fixed TypeScript JSX type errors
+- Add Umami support
+- Add `allowLocalhost` prop for development testing
+- Fix TypeScript JSX type errors
 
 ### v0.0.2
-- Fixed TypeScript type definitions
+- Fix TypeScript type definitions
 
 ### v0.0.1
 - Initial release
-- Plausible support
+- Add Plausible support
 
 
 ## License
