@@ -19,6 +19,7 @@ https://www.npmjs.com/package/analytics-script
 - Google Analytics
 - Mixpanel
 - Crisp Chat
+- Microsoft Clarity
 
 
 ## Installation
@@ -275,6 +276,19 @@ import { Crisp } from 'analytics-script';
 - `allowLocalhost` - Enable in development (default: `false`)
 
 
+### Microsoft Clarity
+
+```tsx
+import { Clarity } from 'analytics-script';
+
+<Clarity projectId="your-clarity-project-id" />
+```
+
+**Props**
+- `projectId` - Your Microsoft Clarity project ID (or use env: `NEXT_PUBLIC_CLARITY_PROJECT_ID`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+
 ### Google Analytics
 
 ```tsx
@@ -474,6 +488,9 @@ export default function App() {
 
 
 ## Changelog
+
+### v0.8.0
+- Add Microsoft Clarity support
 
 ### v0.7.0
 - Add Crisp Chat support

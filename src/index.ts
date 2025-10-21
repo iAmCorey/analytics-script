@@ -4,3 +4,4 @@ export { DataFast, DataFastQueue, trackDataFastGoal, trackDataFastGoalServer } f
 export { GoogleAnalytics, updateGoogleConsent, sendGAEvent } from "./google-analytics/index";
 export { Mixpanel } from "./mixpanel/index";
 export { Crisp } from "./crisp/index";
+export { Clarity } from "./clarity/index";
