@@ -20,6 +20,7 @@ https://www.npmjs.com/package/analytics-script
 - Mixpanel
 - Crisp Chat
 - Microsoft Clarity
+- MoneyFast
 
 
 ## Installation
@@ -477,6 +478,85 @@ export default function App() {
 ```
 
 
+### MoneyFast
+
+```tsx
+import { MoneyFast } from 'analytics-script';
+
+<MoneyFast websiteId="your-website-id" />
+```
+
+**Props**
+- `websiteId` - Your MoneyFast website ID (or use env: `NEXT_PUBLIC_MONEYFAST_WEBSITE_ID`)
+- `scriptUrl` - Custom script URL (default: `https://moneyfa.st/js/script.min.js`, or use env: `NEXT_PUBLIC_MONEYFAST_SCRIPT_URL`)
+- `debug` - Enable debug mode (default: `false`)
+- `defer` - Defer script loading (default: `true`)
+- `allowLocalhost` - Enable in development (default: `false`)
+
+
+#### Tracking Custom Events
+
+```tsx
+import { trackMoneyFastEvent } from 'analytics-script';
+
+<button onClick={() => trackMoneyFastEvent('signup_click')}>
+  Sign Up
+</button>
+
+<button onClick={() => trackMoneyFastEvent('purchase_completed')}>
+  Buy Now
+</button>
+```
+
+
+#### Attribution Helpers
+
+MoneyFast automatically collects UTM parameters, device info, and referrer data into a cookie. Use these helpers to access the data:
+
+```tsx
+import { getMoneyFastAttribution, getMoneyFastMeta, clearMoneyFastAttribution } from 'analytics-script';
+
+// Get raw attribution data
+const data = getMoneyFastAttribution();
+// { moneyfast_ref: 'google', moneyfast_campaign: 'summer', moneyfast_device: 'desktop', ... }
+
+// Get data formatted for Stripe Checkout metadata (adds exit_page, removes timestamp)
+const meta = getMoneyFastMeta();
+
+// Clear attribution cookie
+clearMoneyFastAttribution();
+```
+
+
+#### Stripe Checkout Integration
+
+Pass attribution data as Stripe Checkout metadata to track where your revenue comes from:
+
+```tsx
+import { getMoneyFastMeta } from 'analytics-script';
+
+// When creating a Checkout Session (client-side fetch to your API)
+const meta = getMoneyFastMeta();
+
+const response = await fetch('/api/checkout', {
+  method: 'POST',
+  body: JSON.stringify({ priceId: 'price_xxx', metadata: meta }),
+});
+```
+
+```tsx
+// In your API route (server-side)
+const session = await stripe.checkout.sessions.create({
+  line_items: [{ price: priceId, quantity: 1 }],
+  metadata: meta,                        // for one-time payments
+  subscription_data: { metadata: meta },  // for subscriptions (important!)
+  // ...
+});
+```
+
+> **Note**: Checkout Session metadata does NOT auto-propagate to subscriptions. You must also set `subscription_data.metadata` for subscription payments.
+
+
 ---
 
 
@@ -488,6 +568,9 @@ export default function App() {
 
 
 ## Changelog
+
+### v0.9.0
+- Add MoneyFast support (revenue attribution tracking + custom events)
 
 ### v0.8.0
 - Add Microsoft Clarity support

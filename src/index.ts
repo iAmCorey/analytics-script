@@ -5,3 +5,4 @@ export { GoogleAnalytics, updateGoogleConsent, sendGAEvent } from "./google-anal
 export { Mixpanel } from "./mixpanel/index";
 export { Crisp } from "./crisp/index";
 export { Clarity } from "./clarity/index";
+export { MoneyFast, trackMoneyFastEvent, getMoneyFastAttribution, getMoneyFastMeta, clearMoneyFastAttribution } from "./moneyfast/index";
