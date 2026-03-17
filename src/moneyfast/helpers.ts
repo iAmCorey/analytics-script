@@ -7,9 +7,12 @@ declare global {
       get: () => Record<string, string>;
       meta: () => Record<string, string>;
       clear: () => void;
-      collect: () => void;
     };
   }
+}
+
+function getMoneyFast() {
+  return typeof window !== 'undefined' ? window.MoneyFast : undefined;
 }
 
 /**
@@ -21,9 +24,7 @@ declare global {
  * trackMoneyFastEvent('purchase_completed');
  */
 export function trackMoneyFastEvent(eventName: string): void {
-  if (typeof window !== 'undefined' && window.MoneyFast) {
-    window.MoneyFast.track(eventName);
-  }
+  getMoneyFast()?.track(eventName);
 }
 
 /**
@@ -35,10 +36,7 @@ export function trackMoneyFastEvent(eventName: string): void {
  * // { moneyfast_ref: 'google', moneyfast_campaign: 'summer', moneyfast_device: 'desktop', ... }
  */
 export function getMoneyFastAttribution(): Record<string, string> {
-  if (typeof window !== 'undefined' && window.MoneyFast) {
-    return window.MoneyFast.get();
-  }
-  return {};
+  return getMoneyFast()?.get() ?? {};
 }
 
 /**
@@ -54,10 +52,7 @@ export function getMoneyFastAttribution(): Record<string, string> {
  * // })
  */
 export function getMoneyFastMeta(): Record<string, string> {
-  if (typeof window !== 'undefined' && window.MoneyFast) {
-    return window.MoneyFast.meta();
-  }
-  return {};
+  return getMoneyFast()?.meta() ?? {};
 }
 
 /**
@@ -67,7 +62,5 @@ export function getMoneyFastMeta(): Record<string, string> {
  * clearMoneyFastAttribution();
  */
 export function clearMoneyFastAttribution(): void {
-  if (typeof window !== 'undefined' && window.MoneyFast) {
-    window.MoneyFast.clear();
-  }
+  getMoneyFast()?.clear();
 }
